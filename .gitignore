@@ -1,0 +1,6 @@
+/dist
+/release
+.project
+/assets/css
+.idea/
+/node_modules/

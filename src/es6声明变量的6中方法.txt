@@ -1,0 +1,53 @@
+//var、function、let、const、class、import
+
+/*=======1:不存在变量提升=======*/
+
+// var 声明情况
+console.log(foo);//输出undefined
+var foo = 2;
+
+// let 声明情况
+console.log(bar);//报错ReferenceError
+let bar = 2;
+
+/*=======2:暂时性死区=======*/
+//ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。
+//总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。
+var tmp = 123;
+if(true){
+    tmp = 'abc';//报错ReferenceError
+    let tmp;
+}
+
+/*=======3:不允许重复声明=======*/
+//报错
+function func(){
+    let a = 10;
+    var a = 1;
+}
+//报错
+function func(){
+    let a = 10;
+    let a = 1;
+}
+//报错
+function func(arg){
+    let arg;
+}
+//不报错
+function func(arg){
+    {
+        let arg;
+    }
+}
+
+/*=======4:块级作用域=======*/
+function f1(){
+    let n = 5;
+    if(true){
+        let n = 10;
+    }
+    console.log(n);// 5
+}
+上面的函数有两个代码块，都声明了变量n，运行后输出5.这表示外层代码块不受
+内层代码块的影响。
