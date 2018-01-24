@@ -1,0 +1,31 @@
+{
+  "name": "es6-exprice",
+  "version": "1.0.0",
+  "description": "es6 exprice",
+  "main": "test.js",
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  },
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PT-github/es6-test.git"
+  },
+  "keywords": [
+    "es6",
+    "exprice"
+  ],
+  "author": "pengtao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PT-github/es6-test/issues"
+  },
+  "homepage": "https://github.com/PT-github/es6-test#readme"
+}

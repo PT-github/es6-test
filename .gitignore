@@ -1,3 +1,4 @@
+#存放不被git提交得文件以及目录
 /dist
 /release
 .project
