@@ -1,0 +1,163 @@
+//var、function、let、const、class、import
+
+/*=======1:不存在变量提升=======*/
+
+// var 声明情况
+console.log(foo);//输出undefined
+var foo = 2;
+
+// let 声明情况
+console.log(bar);//报错ReferenceError
+let bar = 2;
+
+/*=======2:暂时性死区=======*/
+//ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。
+//总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。
+var tmp = 123;
+if(true){
+    tmp = 'abc';//报错ReferenceError
+    let tmp;
+}
+
+/*=======3:不允许重复声明=======*/
+//报错
+function func(){
+    let a = 10;
+    var a = 1;
+}
+//报错
+function func(){
+    let a = 10;
+    let a = 1;
+}
+//报错
+function func(arg){
+    let arg;
+}
+//不报错
+function func(arg){
+    {
+        let arg;
+    }
+}
+
+/*=======4:块级作用域=======*/
+function f1(){
+    let n = 5;
+    if(true){
+        let n = 10;
+    }
+    console.log(n);// 5
+}
+上面的函数有两个代码块，都声明了变量n，运行后输出5.这表示外层代码块不受
+内层代码块的影响。
+
+{{{{{let insane = 'Hello World'}}}}};
+内层作用域可以定义外层作用域的同名变量
+{{{{
+let insane = 'Hello World 1';
+{let insane = 'Hello World'}
+}}}};
+
+
+
+
+
+/*=======5:块级作用域与函数声明=======*/
+ES5规定，函数只能在顶层作用域和函数作用域中声明，不能在块级作用域声明。
+eg1:
+if(true){
+    function f(){};
+}
+eg2:
+try{
+    function f(){}
+}catch(e){}
+上述两种函数声明，根据ES5的规定是非法的。
+但是浏览器没有遵守这个规定，为了兼容以前的旧代码，还是支持在块级作用域中声明
+函数，因此上面两种情况实际都能运行，不会报错。
+
+ES6引入块级作用域，明确允许在块级作用域中声明函数。在块级作用域中声明函数行为
+类似于let，在块级作用域之外不能饮用。但是为了减轻对老代码产生的影响，有如下规定：
+    -允许在块级作用域内声明函数；
+    -函数声明类似于var，即会提升到全局作用域或函数作用域的头部；
+    -同时，函数声明还会提升到所在的块级作用域头部
+eg：
+function f(){console.log('I am outside');}
+(function(){
+    if(false){
+        //重复声明一次函数f
+        function f(){console.log('I am inside');}
+    }
+    f();
+})();
+实际运行的是下面的代码：
+function f(){console.log('I am outside');}
+(function(){
+    var f;
+    if(false){
+        //重复声明一次函数f
+        f = function(){console.log('I am inside');}
+    }
+    f();
+})();
+
+
+
+
+/*=======6:do表达式=======*/
+返回内部最后执行的表达式的值。
+function f(){
+    return 1;
+}
+let x = do{
+    let t = f();
+    t * t + 1,100;
+}
+
+/*=======7:const=======*/
+只读常量，一旦声明，不能改变。
+对于复合类型的数据（对象或数组），变量指向内存地址，保存一个指针，
+const只能保证指针固定不变。
+eg:
+const foo = {};
+foo.prop = 123;
+
+foo = {};//TypeError:
+
+
+/*=======8.ES6声明变量的六种方法=======*/
+var、function：声明的全局变量是顶层的属性
+let、const、class、import：声明的全局变量不再是顶层的属性。
+
+
+
+
+/*=======9.global=======*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
